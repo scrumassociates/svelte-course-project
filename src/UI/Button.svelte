@@ -84,7 +84,7 @@
 </style>
 
 {#if href === null}
-  <button {type} class={mode} {href}>{caption}</button>
+  <button {type} class={mode} on:click>{caption}</button>
 {:else}
   <a {href}>{caption}</a>
 {/if}

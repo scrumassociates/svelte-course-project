@@ -20,7 +20,8 @@
       imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Wandsworth_Bridge_Road_Caff%C3%A8_Nero.jpg/1024px-Wandsworth_Bridge_Road_Caff%C3%A8_Nero.jpg",
       address: "123 Main St., New York, NY 34567",
-      contactEmail: "meetup1@meetus.com"
+      contactEmail: "meetup1@meetus.com",
+      isFavorite: false
     },
     {
       id: "m2",
@@ -30,7 +31,8 @@
       imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Starbuckscenter.jpg/1024px-Starbuckscenter.jpg",
       address: "456 Main St., New York, NY 34567",
-      contactEmail: "meetup2@meetus.com"
+      contactEmail: "meetup2@meetus.com",
+      isFavorite: false
     }
   ];
 
@@ -45,6 +47,16 @@
       address: address
     };
     meetups = [newMeetup, ...meetups];
+  }
+
+  function toggleFavorite(event) {
+    const id = event.detail;
+    const updatedMeetup = { ...meetups.find(m => m.id === id) };
+    updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
+    const meetupIndex = meetups.findIndex(m => m.id === id);
+    const updatedMeetups = [...meetups];
+    updatedMeetups[meetupIndex] = updatedMeetup;
+    meetups = updatedMeetups;
   }
 </script>
 
@@ -103,5 +115,5 @@
       on:input={event => (description = event.target.value)} />
     <Button type="submit" caption="Save" />
   </form>
-  <MeetupGrid {meetups} />
+  <MeetupGrid {meetups} on:togglefavorite={toggleFavorite} />
 </main>

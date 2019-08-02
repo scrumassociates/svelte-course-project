@@ -22,11 +22,14 @@
 <section id="meetups">
   {#each meetups as meetup}
     <MeetupItem
+      id={meetup.id}
       title={meetup.title}
       subtitle={meetup.subtitle}
       content={meetup.description}
       imageUrl={meetup.imageUrl}
       email={meetup.contactEmail}
-      address={meetup.address} />
+      address={meetup.address}
+      isFave={meetup.isFavorite}
+      on:togglefavorite />
   {/each}
 </section>
