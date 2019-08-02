@@ -4,7 +4,7 @@
   export let subtitle;
   export let imageUrl;
   export let content;
-  export let description;
+  export let description = null;
   export let address;
   export let email;
 </script>

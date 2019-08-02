@@ -1,7 +1,8 @@
 <script>
-  export let type;
-  export let caption;
-  export let mode;
+  export let type = "button";
+  export let caption = null;
+  export let mode = null;
+  export let href = null;
 </script>
 
 <style>
@@ -82,4 +83,8 @@
   }
 </style>
 
-<button {type} class={mode}>{caption}</button>
+{#if href === null}
+  <button {type} class={mode} {href}>{caption}</button>
+{:else}
+  <a {href}>{caption}</a>
+{/if}

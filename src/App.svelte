@@ -68,28 +68,24 @@
       id="title"
       label="Title"
       value={title}
-      type="text"
       on:input={event => (title = event.target.value)} />
     <TextInput
       controlType="text"
       id="subtitle"
       label="Subtitle"
       value={subtitle}
-      type="text"
       on:input={event => (subtitle = event.target.value)} />
     <TextInput
       controlType="text"
       id="address"
       label="Address"
       value={address}
-      type="text"
       on:input={event => (address = event.target.value)} />
     <TextInput
       controlType="text"
       id="imageurl"
       label="Image URL"
       value={imageUrl}
-      type="text"
       on:input={event => (imageUrl = event.target.value)} />
     <TextInput
       controlType="text"
@@ -105,7 +101,7 @@
       rows="3"
       value={description}
       on:input={event => (description = event.target.value)} />
-    <button>Save</button>
+    <Button type="submit" caption="Save" />
   </form>
   <MeetupGrid {meetups} />
 </main>
