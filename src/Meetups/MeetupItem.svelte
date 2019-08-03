@@ -92,13 +92,14 @@
     <p>{content}</p>
   </div>
   <footer>
-    <Button href="mailto:{email}" caption="Contact" />
+    <Button href="mailto:{email}">Contact</Button>
     <Button
       mode="outline"
       type="button"
       color={isFave ? null : 'success'}
-      caption={isFave ? 'Unfavorite' : 'Favorite'}
-      on:click={() => dispatch('togglefavorite', id)} />
-    <Button type="button" caption="Show Details" />
+      on:click={() => dispatch('togglefavorite', id)}>
+      {isFave ? 'Unfavorite' : 'Favorite'}
+    </Button>
+    <Button type="button">Show Details</Button>
   </footer>
 </article>
