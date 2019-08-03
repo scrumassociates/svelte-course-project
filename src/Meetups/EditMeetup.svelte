@@ -6,26 +6,28 @@
   import { isEmpty, isEmail } from "../helpers/validation.js";
 
   let title = "";
-  let titleValid = false;
   let subtitle = "";
-  let subtitleValid = false;
   let address = "";
-  let addressValid = false;
   let description = "";
-  let descriptionValid = false;
   let email = "";
-  let emailValid = false;
   let imageUrl = "";
-  let imageUrlValid = false;
+  let formValid = false;
 
   const dispatch = createEventDispatcher();
 
   $: titleValid = !isEmpty(title);
-  $: subtitleValie = !isEmpty(subtitle);
+  $: subtitleValid = !isEmpty(subtitle);
   $: addressValid = !isEmpty(address);
   $: descriptionValid = !isEmpty(description);
   $: imageUrlValid = !isEmpty(imageUrl);
   $: emailValid = isEmail(email);
+  $: formValid =
+    titleValid &&
+    subtitleValid &&
+    addressValid &&
+    descriptionValid &&
+    imageUrlValid &&
+    emailValid;
 
   function submitForm() {
     dispatch("save", {
@@ -104,6 +106,8 @@
   </form>
   <div slot="footer">
     <Button type="button" mode="outline" on:click={cancel}>Cancel</Button>
-    <Button type="button" on:click={submitForm}>Save</Button>
+    <Button type="button" disabled={!formValid} on:click={submitForm}>
+      Save
+    </Button>
   </div>
 </Modal>
