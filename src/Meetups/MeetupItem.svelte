@@ -97,7 +97,7 @@
       mode="outline"
       type="button"
       color={isFave ? null : 'success'}
-      on:click={() => dispatch('togglefavorite', id)}>
+      on:click="{() => dispatch('togglefavorite', id)}">
       {isFave ? 'Unfavorite' : 'Favorite'}
     </Button>
     <Button type="button">Show Details</Button>
