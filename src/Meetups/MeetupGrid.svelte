@@ -30,6 +30,6 @@
       email={meetup.contactEmail}
       address={meetup.address}
       isFave={meetup.isFavorite}
-      on:togglefavorite />
+      on:showdetails />
   {/each}
 </section>
