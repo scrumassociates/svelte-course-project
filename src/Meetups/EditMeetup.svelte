@@ -6,13 +6,28 @@
   import Modal from "../UI/Modal.svelte";
   import { isEmpty, isEmail } from "../helpers/validation.js";
 
+  export let id = null;
+
   let title = "";
   let subtitle = "";
   let address = "";
   let description = "";
-  let email = "";
+  let contactEmail = "";
   let imageUrl = "";
   let formValid = false;
+
+  if (id) {
+    const unsubscribe = meetups.subscribe(items => {
+      const selectedMeetup = items.find(i => i.id === id);
+      title = selectedMeetup.title;
+      subtitle = selectedMeetup.subtitle;
+      address = selectedMeetup.address;
+      description = selectedMeetup.description;
+      contactEmail = selectedMeetup.contactEmail;
+      imageUrl = selectedMeetup.imageUrl;
+    });
+    unsubscribe();
+  }
 
   const dispatch = createEventDispatcher();
 
@@ -21,7 +36,7 @@
   $: addressValid = !isEmpty(address);
   $: descriptionValid = !isEmpty(description);
   $: imageUrlValid = !isEmpty(imageUrl);
-  $: emailValid = isEmail(email);
+  $: emailValid = isEmail(contactEmail);
   $: formValid =
     titleValid &&
     subtitleValid &&
@@ -36,10 +51,17 @@
       subtitle: subtitle,
       description: description,
       imageUrl: imageUrl,
-      contactEmail: email,
+      contactEmail: contactEmail,
       address: address
     };
-    meetups.addMeetup(meetupData);
+
+    if (id) {
+      meetups.updateMeetup(id, meetupData);
+      id = null;
+    } else {
+      meetups.addMeetup(meetupData);
+    }
+
     dispatch("save");
   }
 
@@ -90,13 +112,13 @@
       on:input={event => (imageUrl = event.target.value)} />
     <TextInput
       controlType="text"
-      id="email"
+      id="contactEmail"
       label="E-Mail"
       valid={emailValid}
-      validityMessage="Please enter a valid email address."
-      value={email}
-      type="email"
-      on:input={event => (email = event.target.value)} />
+      validityMessage="Please enter a valid contactEmail address."
+      value={contactEmail}
+      type="contactEmail"
+      on:input={event => (contactEmail = event.target.value)} />
     <TextInput
       controlType="textarea"
       id="description"
